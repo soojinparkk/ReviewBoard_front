@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import { TextField, Button } from '@material-ui/core';
+
+
 class ModifyReviewDetail extends Component {
     constructor(props) {
         super(props);
@@ -20,6 +23,7 @@ class ModifyReviewDetail extends Component {
     render() {
         return (
             <div className="ModifyReview">
+                <h2>Review 수정하기</h2>
                 <form className="ModifyForm"
                     action="/update_process" method="post"
                     onSubmit={function(e){
@@ -31,25 +35,29 @@ class ModifyReviewDetail extends Component {
                     }.bind(this)}>
 
                     <p>
-                        <input 
-                            type="text"
+                        <TextField
+                            required id="standard-required"
                             name="title"
+                            margin="normal"
                             value={this.state.title}
-                            placeholder="title"
                             onChange={this.inputFormHandler}>
-                        </input>
+                        </TextField>
                     </p>
 
                     <p>
-                        <textarea 
+                        <TextField
+                            required id="standard-multiline-flexible"
                             name="content"
+                            margin="normal"
+                            multiline
+                            rowsMax={4}
                             value={this.state.content}
                             onChange={this.inputFormHandler}>
-                        </textarea>
+                        </TextField>
                     </p>
 
                     <p>
-                        <input type="submit"></input>
+                        <Button variant="contained" color="primary" type="submit">Submit</Button>
                     </p>
 
                 </form>

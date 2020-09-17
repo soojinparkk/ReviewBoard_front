@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import ModifyReviewDetail from './ModifyReviewDetail';
 import ReadReviewDetail from './ReadReviewDetail';
-import ReadReviewDetailBtn from './ReviewDetailBtn';
+import ReviewDetailBtn from './ReviewDetailBtn';
+
+import { Container, Paper } from '@material-ui/core';
+import ReviewDetailLikeBtn from './ReviewDetailLikeBtn';
+
+const paperStyle = {
+    padding: "20px",
+    margin: "20px"
+}
 
 class ReviewDetail extends Component {
     constructor(props) {
@@ -16,30 +24,19 @@ class ReviewDetail extends Component {
                 content: 'content',
                 likeNum: 0
             },
-            result: []
+            likeState: 0    // 현재 리뷰 좋아요 안 한 경우: 0 / 좋아요 한 경우: 1
         }
     }
 
     // 해당 모드에 따른 review 띄워줌
     getReview() {
-        var _title, _content, _writer, _date = null;
-        var _likeNum = 0;
         var _article = null;
 
-        if (this.state.mode === 'read') {
-    
+        if (this.state.mode === 'read') {   
             _article = <ReadReviewDetail review={this.state.review}></ReadReviewDetail>
-
             return _article
 
         } else if (this.state.mode === 'modify') {
-            /*
-            var _data = {
-                id: this.state.review.review_id,
-                title: this.state.review.title,
-                content: this.state.review.content
-            }*/
-
             _article = <ModifyReviewDetail
                             review={this.state.review}
                             onSubmit={function(_title, _content){
@@ -64,8 +61,9 @@ class ReviewDetail extends Component {
      
             return _article
 
-        } else if (this.state.mode === 'like') {
-
+        } 
+        else if (this.state.mode === 'like') {
+            
         }
 
     }
@@ -83,29 +81,33 @@ class ReviewDetail extends Component {
             // 해당 리뷰 상세정보 담긴 객체 받아서
             // 위의 review 객체 setState
 
-            <div className="ReviewDetail">
-
+            <Container maxWidth="md">
+                <Paper className="Paper" style={paperStyle}>
 
                 <div className="ButtonSection">
-                    <ReadReviewDetailBtn onChangeMode={function(_mode){
-                        if (_mode === 'delete') {   // 현재 모드가 delete일 때
-                            if (window.confirm('Really?')) {
-                                // 홈 화면으로 돌아감
-                                // 서버한테 현재 review_id 보냄
+                    <ReviewDetailBtn onChangeMode={function(_mode){
+                            if (_mode === 'delete') {   // 현재 모드가 delete일 때
+                                if (window.confirm('Really?')) {
+                                    // 홈 화면으로 돌아감
+                                    // 서버한테 현재 review_id 보냄
+                                }
+                            } else {
+                                this.setState({     // 현재 모드가 modify일 때
+                                    mode: _mode
+                                });
                             }
-                        } else {
-                            this.setState({     // 현재 모드가 modify or like일 때
-                                mode: _mode
-                            });
-                        }
-                    }.bind(this)}>
-                    </ReadReviewDetailBtn>
+                        }.bind(this)}>
+                    </ReviewDetailBtn>
+
+                    <ReviewDetailLikeBtn></ReviewDetailLikeBtn>
                 </div>
 
                 <div className="ReviewSection">
                     {this.getReview()}
                 </div>
-            </div>
+
+                </Paper>
+            </Container>
         )
     }
 }
