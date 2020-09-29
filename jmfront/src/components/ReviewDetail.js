@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import ModifyReviewDetail from './ModifyReviewDetail';
 import ReadReviewDetail from './ReadReviewDetail';
 import ReviewDetailBtn from './ReviewDetailBtn';
-
-import { Container, Paper } from '@material-ui/core';
-import ReviewDetailLikeBtn from './ReviewDetailLikeBtn';
+import { Paper } from '@material-ui/core';
 
 const paperStyle = {
     padding: "20px",
@@ -24,7 +22,7 @@ class ReviewDetail extends Component {
                 content: 'content',
                 likeNum: 0
             },
-            likeState: 0    // 현재 리뷰 좋아요 안 한 경우: 0 / 좋아요 한 경우: 1
+            // likeState: 0    // 현재 리뷰 좋아요 안 한 경우: 0 / 좋아요 한 경우: 1
         }
     }
 
@@ -81,15 +79,13 @@ class ReviewDetail extends Component {
             // 해당 리뷰 상세정보 담긴 객체 받아서
             // 위의 review 객체 setState
 
-            <Container maxWidth="md">
-                <Paper className="Paper" style={paperStyle}>
-
+            <div className="ReviewDetail">
                 <div className="ButtonSection">
                     <ReviewDetailBtn onChangeMode={function(_mode){
                             if (_mode === 'delete') {   // 현재 모드가 delete일 때
-                                if (window.confirm('Really?')) {
-                                    // 홈 화면으로 돌아감
-                                    // 서버한테 현재 review_id 보냄
+                                if (window.confirm('삭제하시겠습니까?')) {
+                                    // 홈 화면으로 돌아감 (리뷰리스트 화면)
+                                    // 서버한테 현재 review_id 보냄 -> 삭제 요청
                                 }
                             } else {
                                 this.setState({     // 현재 모드가 modify일 때
@@ -99,15 +95,15 @@ class ReviewDetail extends Component {
                         }.bind(this)}>
                     </ReviewDetailBtn>
 
-                    <ReviewDetailLikeBtn></ReviewDetailLikeBtn>
                 </div>
 
                 <div className="ReviewSection">
-                    {this.getReview()}
+                    <Paper className="Paper" style={paperStyle}>
+                        {this.getReview()}
+                    </Paper>
                 </div>
-
-                </Paper>
-            </Container>
+            </div>
+                
         )
     }
 }

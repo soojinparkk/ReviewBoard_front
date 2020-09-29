@@ -1,7 +1,28 @@
 import React, { Component } from 'react';
+import styled from "styled-components";
+import { TextField } from '@material-ui/core';
 
-import { TextField, Button } from '@material-ui/core';
+const SubmitButton = styled.button`
+    background: #fcc419;
+    /* hover 했을 때 밝아짐 */
+    &: hover {
+        background: #ffe066;
+    }
+    /* 클릭했을 때 색상이 어두워짐 */
+    &: active {
+        background: #f59f00;
+    }
+    border-radius: 4px;
+    height: 45px;
+    font-size: 17px;
+    border: none;
+    outline: none;
+`;
 
+const FormStyle = styled.form`
+    display: flex;
+    flex-direction: 'column';
+`;
 
 class ModifyReviewDetail extends Component {
     constructor(props) {
@@ -23,9 +44,7 @@ class ModifyReviewDetail extends Component {
     render() {
         return (
             <div className="ModifyReview">
-                <h2>Review 수정하기</h2>
-                <form className="ModifyForm"
-                    action="/update_process" method="post"
+                <FormStyle className="ModifyForm"
                     onSubmit={function(e){
                         e.preventDefault();
                         this.props.onSubmit(
@@ -33,34 +52,36 @@ class ModifyReviewDetail extends Component {
                             this.state.content
                         )
                     }.bind(this)}>
-
-                    <p>
-                        <TextField
-                            required id="standard-required"
-                            name="title"
-                            margin="normal"
-                            value={this.state.title}
-                            onChange={this.inputFormHandler}>
-                        </TextField>
-                    </p>
-
-                    <p>
-                        <TextField
-                            required id="standard-multiline-flexible"
-                            name="content"
-                            margin="normal"
-                            multiline
-                            rowsMax={4}
-                            value={this.state.content}
-                            onChange={this.inputFormHandler}>
-                        </TextField>
-                    </p>
-
-                    <p>
-                        <Button variant="contained" color="primary" type="submit">Submit</Button>
-                    </p>
-
-                </form>
+                    
+                    <TextField
+                        name="title"
+                        value={this.state.title}
+                        label="Title"
+                        variant="outlined"
+                        margin="normal"
+                        onChange={this.inputFormHandler}>
+                    </TextField>
+                    
+                    <TextField
+                        name="content"
+                        value={this.state.content}
+                        label="Content"
+                        variant="outlined"
+                        margin="normal"
+                        multiline
+                        rows={4}
+                        value={this.state.content}
+                        onChange={this.inputFormHandler}>
+                    </TextField>
+                    
+                    <SubmitButton 
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        type="submit">Submit
+                    </SubmitButton>
+                    
+                </FormStyle>
             </div>
         );
     }
