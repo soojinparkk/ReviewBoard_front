@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from "styled-components";
 import { TextField } from '@material-ui/core';
 
+// 밑의 버튼 나중에 상속해서 받아오면 됨
 const SubmitButton = styled.button`
     background: #fcc419;
     /* hover 했을 때 밝아짐 */
