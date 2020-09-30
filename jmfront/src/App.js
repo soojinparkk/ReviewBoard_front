@@ -1,13 +1,10 @@
 import React from 'react';
 import './App.css';
-import ReviewDetail from './components/ReviewDetail';
+import NavBarTemplate from './components/NavBarTemplate';
 
 function App() {
   return (
-    <div className="App">
-    
-      <ReviewDetail></ReviewDetail>
-    </div>
+    <NavBarTemplate />
   );
 }
 
