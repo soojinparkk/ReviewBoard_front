@@ -73,7 +73,6 @@ function NavBar() {
         <MyTabs value={value} onChange={handleChange} centered variant="fullWidth">
           <Tab label="리뷰 조회" {...a11yProps(0)} />
           <Tab label="리뷰 등록" {...a11yProps(1)} />
-          <Tab label="내 정보 보기" {...a11yProps(2)} />
         </MyTabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -82,7 +81,6 @@ function NavBar() {
       <TabPanel value={value} index={1}>
         <ReviewFormContainer />
       </TabPanel>
-      <TabPanel value={value} index={2}>내 정보 보기</TabPanel>
     </div>
   );
 }

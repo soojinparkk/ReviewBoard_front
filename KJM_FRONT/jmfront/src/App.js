@@ -4,7 +4,10 @@ import NavBarTemplate from './components/NavBarTemplate';
 
 function App() {
   return (
-    <NavBarTemplate />
+    <div>
+      <NavBarTemplate />
+    </div>
+    
   );
 }
 

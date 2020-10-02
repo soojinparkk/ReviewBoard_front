@@ -4,6 +4,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import styled from 'styled-components';
 import { TiHeartOutline, TiHeartFullOutline } from 'react-icons/ti';
+// import ReviewDetail from './ReviewDetail';
 
 const NumandHeart = styled.div`
     display: flex;
@@ -11,9 +12,14 @@ const NumandHeart = styled.div`
 `;
 
 const ReviewItem = React.memo(function ReviewItem({ review, onToggle }) {
+
+    const onClick = () => {
+        
+    }
+
     return (
         <div>
-            <Card className="ReviewPosts">
+            <Card className="ReviewPosts" onClick={onClick}>
                 <CardContent>
                     <NumandHeart>
                         <Typography className="ReviewId">
@@ -61,13 +67,13 @@ const Reviews = React.memo(function Reviews({ reviews, onToggle }) {
     );
 })
 
+
 function ReviewList({ reviews, onToggle }) {
     return (
         <div>
             <Reviews 
                 reviews={reviews}
-                onToggle={onToggle}    
-            />
+                onToggle={onToggle}/>
         </div>
     );
 }

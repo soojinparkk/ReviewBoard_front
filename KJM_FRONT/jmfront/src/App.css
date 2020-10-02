@@ -20,3 +20,9 @@
 .Review_Heart {
   margin-left: auto;
 }
+
+.ReviewDetailBtn {
+  justify-content: flex-end;
+  display: flex;
+  padding: 2rem;
+}
